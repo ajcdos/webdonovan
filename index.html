@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es" ng-app='myApp'>
+<head>
+<meta charset="utf-8">
+<title>El Corvus</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/vtns.css">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">    
+<script src="scripts/socket.io.js"></script>        
+<script src="scripts/angular.min.js"></script>        
+<script src="scripts/main.js"></script>        
+</head>
+<body class="ctn nwv" ng-controller='CtlP'>
+  <div class="ctn nwh jstart">
+    <div class="log">
+      
+    </div>
+    <div class="ctn nwv auto_ajt">
+	    <div class="ctn nwh">
+	      <div class="f1 auto_ajt corch titulo">Sistema de Apuestas Corvus</div>
+	    </div>
+	    <div class="ctn wh">
+	      <div class="bmenu f1" ng-click=vtn(0) ng-class="{bmenu_a:v[0]}">Inicio</div>
+	      <div class="bmenu f1" ng-click=vtn(1) ng-class="{bmenu_a:v[1]}">Administradores</div>
+	      <div class="bmenu f1">Agencias</div>
+	      <div class="bmenu f1" href="Corvus.exe" >Clientes</div>
+	      <div class="bmenu f1">Info</div>      
+        <a class="bmenu f1 sl" href="Instalador_Corvus.exe" >Corvus.exe</a>        
+	    </div>
+    </div>
+    <div class="log ctn nwv jcenter">
+      <div class="f12">Visitantes</div>
+      <div class="f15">{{vs}}</div>
+    </div>
+  </div>
+  <div class="mc1 mc_p" ng-class="{'clr1':(cbcd==1),'clr2':(cbcd==2),'clr3':(cbcd==3),'clr4':(cbcd==4)}">Proceso : {{msgp}}</div>
+  <div class="ctn nwh">
+    <div class="log">
+      
+    </div>
+    
+
+    <div class="ctn nwv auto_ajt_tt corch">
+      
+
+      <div ng-show='v[0]'>
+        <div class="corch">
+              <div class="ctn nwh f1 mc1 jstart">
+                <!-- <div class="w400"> -->
+                  <div class="ctn w250 mct1 nwv">
+                    <label class="f18">
+                      Resultados de las loterias :      
+                    </label>
+                  </div>
+                  <div class="ctn w200 mct1 f12">
+                    <input 
+                    class="f12" 
+                    ng-class="{'c_edit':true}" 
+                    ng-model='fr' 
+                    type="date" 
+                    name="date1" 
+                    required>
+                  </div>
+                  <div class="ctn nwh w150 mct1">
+                    <button  
+                    href="" 
+                    class="c_boton f12 f1"
+                    ng-click='a_rst()'>Actualizar</button>                    
+                  </div>
+                </div>
+              <!-- </div> -->
+
+        </div>
+
+        <div class="ctn wh ncorch">
+          <div class="w200 ncorch">
+
+            <div class="ctn auto_ajt_tt2 corch_b" ng-click=vtn2(0) ng-class={corch_b_a:v2[0]}>
+              Caracas
+            </div>
+            <div class="ctn auto_ajt_tt2 corch_b" ng-click=vtn2(1) ng-class={corch_b_a:v2[1]}>
+              Chance
+            </div>
+            <div class="ctn auto_ajt_tt2 corch_b"  ng-click=vtn2(2) ng-class={corch_b_a:v2[2]}>
+              Tachira
+            </div>
+            <div class="ctn auto_ajt_tt2 corch_b" ng-click=vtn2(3) ng-class={corch_b_a:v2[3]}>
+              Triple Gordo
+            </div>
+            <div class="ctn auto_ajt_tt2 corch_b"  ng-click=vtn2(4) ng-class={corch_b_a:v2[4]}>
+              Zamorano
+            </div>
+            <div class="ctn auto_ajt_tt2 corch_b" ng-click=vtn2(5)  ng-class={corch_b_a:v2[5]}>
+              Zulia
+            </div>
+          </div>
+
+          <div ng-show="vr[0]">
+
+            <div class="ctn nwh auto_ajt_tt2 ncorch">
+              <div class="ctn nwv">
+                <div class="mc3 f20 w150 f1"></div>
+                <div class="mc3 f20 w150 corch_b_a">A</div>
+                <div class="mc3 f20 w150 corch_b_a">B</div>
+                <div class="mc3 f20 w150 corch_b_a">Signo/Esp.</div>
+              </div>
+              <div class="ctn nwv">
+                <div class="mc3 f20 w100 corch_b_a">Dia</div>
+                <div class="mc3 f20 w100">{{mrst[0]}}</div>
+                <div class="mc3 f20 w100">{{mrst[1]}}</div>
+                <div class="mc3 f20 w100">{{mrst[2]}}</div>
+              </div>
+              <div class="ctn nwv">
+                <div class="mc3 f20 w100 corch_b_a">Tarde</div>
+                <div class="mc3 f20 w100">{{mrst[3]}}</div>
+                <div class="mc3 f20 w100">{{mrst[4]}}</div>
+                <div class="mc3 f20 w100">{{mrst[5]}}</div>
+              </div>
+              <div class="ctn nwv">
+                <div class="mc3 f20 w100 corch_b_a">Noche</div>
+                <div class="mc3 f20 w100">{{mrst[6]}}</div>
+                <div class="mc3 f20 w100">{{mrst[7]}}</div>
+                <div class="mc3 f20 w100">{{mrst[8]}}</div>
+              </div>
+            </div>
+
+          </div>
+          <div ng-show="vr[1]">
+
+            <div class="ctn nwh auto_ajt_tt2 ncorch">
+              <div class="ctn nwv">
+                <div class="mc3 f20 w150 f1"></div>
+                <div class="mc3 f20 w150 corch_b_a">A</div>
+                <div class="mc3 f20 w150 corch_b_a">B</div>
+                <div class="mc3 f20 w150 corch_b_a">Signo/Esp.</div>
+              </div>
+              <div class="ctn nwv">
+                <div class="mc3 f20 w100 corch_b_a">Dia</div>
+                <div class="mc3 f20 w100">{{mrst_a[0]}}</div>
+                <div class="mc3 f20 w100">{{mrst_a[1]}}</div>
+                <div class="mc3 f20 w100">{{mrst_a[2]}}</div>
+              </div>
+              <div class="ctn nwv">
+                <div class="mc3 f20 w100 corch_b_a">Tarde</div>
+                <div class="mc3 f20 w100">{{mrst_a[3]}}</div>
+                <div class="mc3 f20 w100">{{mrst_a[4]}}</div>
+                <div class="mc3 f20 w100">{{mrst_a[5]}}</div>
+              </div>
+              <div class="ctn nwv">
+                <div class="mc3 f20 w100 corch_b_a">Noche</div>
+                <div class="mc3 f20 w100">{{mrst_a[6]}}</div>
+                <div class="mc3 f20 w100">{{mrst_a[7]}}</div>
+                <div class="mc3 f20 w100">{{mrst_a[8]}}</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <div ng-show='v[1]'>
+        <div class="corch">Administrador {{msga}}</div>
+        <div class="ctn nwh jcenter">
+          
+          <div class="marco ctn nwv" ng-hide=ins>
+            <form role="form" name="form1" class="marco w400">
+              <div class="ctn nwh w300">
+                <div class="w200 izq">
+                  <label ng-class="{'c_label2': form1.cnombre.$invalid , 'c_label': form1.cnombre.$valid}">Administrador : </label>
+                </div>
+                <div class="w100">
+                  <input 
+                  ng-class="{'c_edit':true}" 
+                  title="entre 3 y 20 caractares" 
+                  type="text" 
+                  ng-model='prn' 
+                  name="cnombre" 
+                  pattern="[a-zA-Z0-9 _-ñÑ]{3,20}" 
+                  required>  
+                </div>
+              </div>
+              <div class="ctn nwh w300">  
+                <div class="w200 izq">
+                  <label ng-class="{'c_label2': form1.pass.$invalid , 'c_label': form1.pass.$valid}">Clave : </label>
+                </div>
+                <div class="w100">
+                  <input 
+                  ng-class="{'c_edit':true}" 
+                  type="password" 
+                  ng-model='prc' 
+                  name="pass" 
+                  required>
+                </div>
+              </div>
+            </form>
+            <div class="marco w400 ctn wh auto_ajt_tt">
+              <button  
+              href="" 
+              ng-class="{'c_boton2':form1.$invalid, 'c_boton':form1.$valid, f1:true}" 
+              ng-click=i_ssn() 
+              ng-disabled='form1.$invalid'>Entrar</button>
+              <button  
+              href="" 
+              class="c_boton f1"
+              ng-click='vtn(0)'>Atras</button>
+            </div>        
+          </div>
+
+          <div class="marco ctn nwh" ng-show=ins>
+            <div class="ctn nwv ncorch">
+              <div class="bmenu f15" ng-click=b_vts_a() ng-class="{bmenu_a:v3[0]}">Ventas por Agencias</div>
+              <div class="bmenu f15" ng-click=b_vts_s() ng-class="{bmenu_a:v3[1]}">Ventas por Sorteos</div>
+              <div class="bmenu f15" ng-click=b_vts_f() ng-class="{bmenu_a:v3[2]}">Ventas por Fecha</div>
+              <div class="bmenu f15" ng-click=vtn3(3) ng-class="{bmenu_a:v3[3]}">Configurar Agencias</div>
+              <div class="bmenu f15" ng-click=vtn3(4) ng-class="{bmenu_a:v3[4]}">Configurar Loterias</div>
+              <div class="bmenu f15" ng-click=c_ssn() ng-class="{bmenu_a:v3[5]}">Cerrar Session</div>              
+            </div>
+            <div class="ncorch">
+              <div class="ctn nwh mc1">
+                <div class="ctn nwh f1 mc1">
+                  <div class="w80 izq f1">
+                    <label class="f15">
+                      Desde :
+                    </label>
+                  </div>
+                  <div class="ctn w80 f12 f1">
+                    <input 
+                    class="f12" 
+                    ng-class="{'c_edit':true}" 
+                    ng-model='f1' 
+                    type="date" 
+                    name="date1" 
+                    required>
+                  </div>
+                </div>
+                <div class="ctn nwh f1 mc1">
+                  <div class="w80 izq f1">
+                    <label class="f15">
+                      Hasta :
+                    </label>
+                  </div>
+                  <div class="ctn w80 f12 f1">
+                    <input 
+                    class="f12" 
+                    ng-class="{'c_edit':true}" 
+                    ng-model='f2' 
+                    type="date" 
+                    name="date1" 
+                    required>
+                  </div>
+                </div>
+              </div>              
+              <div class="ctn nwv corch" ng_show=v3[0]>
+                <div class="ctn nwh">
+                  <div class="mc2 w120 f12 bmenu_a">Administrador</div>
+                  <div class="mc2 w120 f12 bmenu_a">Agencia</div>
+                  <div class="mc2 w80 f12 bmenu_a">Venta</div>
+                  <div class="mc2 w80 f12 bmenu_a">Comision</div>
+                  <div class="mc2 w80 f12 bmenu_a">Premios</div>
+                  <div class="mc2 w80 f12 bmenu_a">Saldo</div>
+                </div>
+                <div class="ctn nwh" ng-repeat='registro in l_vts'>
+                  <div class="mc2 w120 f12 izq" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.adm}}</div>
+                  <div class="mc2 w120 f12 izq" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}" ng-click=b_vts_sa(registro.id,registro.agc)>
+                    {{registro.agc}}
+                  </div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.mnt}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.cmc}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.prm}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.sld}}</div>
+                </div>
+              </div>
+              <div class="ctn nwv corch" ng_show=v3[1]>
+                <div class="ctn nwh">
+                  <div class="mc2 w150 f12 bmenu_a">Sorteo</div>
+                  <div class="mc2 w90 f12 bmenu_a">Nro Ganador</div>
+                  <div class="mc2 w80 f12 bmenu_a">Venta</div>
+                  <div class="mc2 w80 f12 bmenu_a">Comision</div>
+                  <div class="mc2 w80 f12 bmenu_a">Premios</div>
+                  <div class="mc2 w80 f12 bmenu_a">Saldo</div>
+                </div>
+                <div class="ctn nwh" ng-repeat='registro in l_vts'>
+                  <div class="mc2 w150 f12 izq" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.adm}}</div>
+                  <div class="mc2 w90 f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.agc}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.mnt}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.cmc}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.prm}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.sld}}</div>
+                </div>
+              </div>
+              <div class="ctn nwv corch" ng_show=v3[2]>
+                <div class="ctn nwh">
+                  <div class="mc2 w120 f12 bmenu_a">Dia</div>
+                  <div class="mc2 w120 f12 bmenu_a">Fecha</div>
+                  <div class="mc2 w80 f12 bmenu_a">Venta</div>
+                  <div class="mc2 w80 f12 bmenu_a">Comision</div>
+                  <div class="mc2 w80 f12 bmenu_a">Premios</div>
+                  <div class="mc2 w80 f12 bmenu_a">Saldo</div>
+                </div>
+                <div class="ctn nwh" ng-repeat='registro in l_vts'>
+                  <div class="mc2 w120 f12 izq" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.adm}}</div>
+                  <div class="mc2 w120 f12 cen" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.agc}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.mnt}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.cmc}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.prm}}</div>
+                  <div class="mc2 w80 der f12" ng-class="{bmenu_a:(registro.agc==sg),clr4:registro.sld[0]=='-'}">{{registro.sld}}</div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="log">
+      
+    </div>
+
+  </div>
+</body>
+</html>
